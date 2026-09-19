@@ -24,7 +24,52 @@ void displayBooks(const vector<Book>& books) {
         cout << endl;
     }
 }
+void issueBook(vector<Book>& books, int bookId) {
 
+    for (Book& book : books) {
+
+        if (book.id == bookId) {
+
+            if (book.available) {
+                book.available = false;
+
+                cout << "\nBook issued successfully!"
+                     << endl;
+            }
+            else {
+                cout << "\nBook is already issued."
+                     << endl;
+            }
+
+            return;
+        }
+    }
+
+    cout << "\nBook not found." << endl;
+}
+void returnBook(vector<Book>& books, int bookId) {
+
+    for (Book& book : books) {
+
+        if (book.id == bookId) {
+
+            if (!book.available) {
+                book.available = true;
+
+                cout << "\nBook returned successfully!"
+                     << endl;
+            }
+            else {
+                cout << "\nBook was not issued."
+                     << endl;
+            }
+
+            return;
+        }
+    }
+
+    cout << "\nBook not found." << endl;
+}
 int main() {
 
     vector<Book> books = {
@@ -35,6 +80,27 @@ int main() {
         {105, "Computer Networks", true}
     };
 
+    // Display all books
+    displayBooks(books);
+
+    int bookId;
+
+    // Issue a book
+    cout << "\nEnter Book ID to issue: ";
+    cin >> bookId;
+
+    issueBook(books, bookId);
+
+    // Display books after issuing
+    displayBooks(books);
+
+    // Return a book
+    cout << "\nEnter Book ID to return: ";
+    cin >> bookId;
+
+    returnBook(books, bookId);
+
+    // Display books after returning
     displayBooks(books);
 
     return 0;
